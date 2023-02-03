@@ -4,6 +4,7 @@ const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
 const NUMBER_OF_GUESSES = 6
+const MAX_WORD_LENGTH = 5
 
 const useWordle = (solution) => {
     
@@ -76,7 +77,7 @@ const useWordle = (solution) => {
 
         // Add new guess if turns < 5 and current guess has not been entered before
         if (key === 'Enter') {
-            if (turn > 5) {
+            if (turn > NUMBER_OF_GUESSES) {
                 console.log('All turns have been used up');
                 return
             }
@@ -86,8 +87,8 @@ const useWordle = (solution) => {
                 return
             }
 
-            if (currentGuess.length !== 5) {
-                console.log('Guess must be 5 letters long');
+            if (currentGuess.length !== MAX_WORD_LENGTH) {
+                console.log(`Guess must be ${MAX_WORD_LENGTH} letters long`);
                 return
             }
 
