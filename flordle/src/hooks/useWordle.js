@@ -3,12 +3,13 @@ import {useState} from 'react'
 const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
+const NUMBER_OF_GUESSES = 6
 
 const useWordle = (solution) => {
     
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
-    const [guesses, setGuesses] = useState([]) // Array of all the guesses made
+    const [guesses, setGuesses] = useState([...Array(NUMBER_OF_GUESSES)]) // Array of all the guesses made
     const [history, setHistory] = useState([])
     const [isCorrect, setIsCorrect] = useState(false)
 
@@ -40,11 +41,24 @@ const useWordle = (solution) => {
         return formattedGuess
     }
 
-    // Add a new guess to the running list of guesses
-    const addNewGuess = (newGuess) => {
-        setGuesses((prev) => {
-            return [...prev, [newGuess]]
+    // Add a new guess to the running list of guesses and update the turn
+    const addNewGuess = (formattedGuess) => {
+        if (currentGuess === solution) {
+            setIsCorrect(true);
+        }
+
+        setGuesses((prev) =>  {
+            const newGuesses = [...prev]
+            newGuesses[turn] = formattedGuess
+            return newGuesses
         })
+
+        setHistory((prev) => [...prev, currentGuess])
+
+        setTurn((prev) => prev + 1)
+
+        // Reset current guess string for a new guess
+        setCurrentGuess('')
     }
 
     //Handle keyup events i.e. when letters are pressed or Enter is pressed
@@ -77,9 +91,9 @@ const useWordle = (solution) => {
                 return
             }
 
-            setHistory((prev) => [...prev, currentGuess])
+            const formattedGuess = formatGuess()
 
-            console.log(formatGuess())
+            addNewGuess(formattedGuess)
         }
     }
 
