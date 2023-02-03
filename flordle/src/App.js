@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from'react';
+import Wordle from './components/Wordle';
 
 function App() {
-
   const [solution, setSolution] = useState(null)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <h1>Wordle</h1>
-      {solution && <h2>Solution is: {solution}</h2>}
+      {solution && <Wordle solution={solution}/>}
     </div>
   );
 }
