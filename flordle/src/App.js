@@ -1,15 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from'react';
 
 function App() {
+
+  const [solution, setSolution] = useState(null)
+
+  useEffect(() => {
+    fetch('http://localhost:3001/solutions')
+    .then(res => res.json())
+    .then(json => {
+      const randomSolution = json[Math.floor(Math.random() * json.length)];
+
+      setSolution(randomSolution.word);
+    });
+  }, [setSolution]);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Wordle
-        </p>
-      </header>
+      <h1>Wordle</h1>
+      {solution && <h2>Solution is: {solution}</h2>}
     </div>
   );
 }
