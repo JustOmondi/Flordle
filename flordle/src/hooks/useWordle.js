@@ -1,6 +1,10 @@
 import {useState} from 'react'
 
-const useWordle = () => {
+const GREEN = 'green'
+const YELLOW = 'yellow'
+const GREY = 'grey'
+
+const useWordle = (solution) => {
     
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
@@ -10,8 +14,30 @@ const useWordle = () => {
 
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
     const formatGuess = () => {
-        console.log(`formatting current guess - ${currentGuess}`)
+        const solutionArray = [...solution]
 
+        const formattedGuess = [...currentGuess].map((letter)=> {
+            return {key: letter, colour: GREY}
+        })
+
+
+        // Step 1: Find letters guessed that are in the right position
+        formattedGuess.forEach((letter, i) => {
+            if (solutionArray[i] === letter.key) {
+                formattedGuess[i].colour = GREEN
+                solutionArray[i] = null
+            }
+        });
+
+        // Step 2: Find any letters that are in the word but not in the right position
+        formattedGuess.forEach((letter, i) => {
+            if (solutionArray.includes(letter.key) && letter.colour !== GREEN) {
+                formattedGuess[i].colour = YELLOW
+                solutionArray[solutionArray.indexOf(letter.key)] = null
+            }
+        })
+
+        return formattedGuess
     }
 
     // Add a new guess to the running list of guesses
@@ -51,7 +77,9 @@ const useWordle = () => {
                 return
             }
 
-            formatGuess()
+            setHistory((prev) => [...prev, currentGuess])
+
+            console.log(formatGuess())
         }
     }
 
