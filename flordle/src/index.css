@@ -36,17 +36,17 @@ h1 {
 .row > div.green {
   background: #5ac85a;
   border-color: #5ac85a;
-  animation: flip 0.5s ease forward;
+  transition: all 0.3s ease-in;
 }
 .row > div.grey {
   background: #a1a1a1;
   border-color: #a1a1a1;
-  animation: flip 0.5s ease;
+  transition: all 0.3s ease-in;
 }
 .row > div.yellow {
   background: #e2cc68;
   border-color: #e2cc68;
-  animation: flip 0.5s ease;
+  transition: all 0.3s ease-in;
 }
 
 .row > div:nth-child(2) {

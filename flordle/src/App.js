@@ -2,19 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from'react';
 import Flordle from './components/Flordle';
-import { countries } from '../data/countryCodes'
+import { countries } from './data/gameData'
 
 function App() {
-  const [solution, setSolution] = useState({})
+  const [solution, setSolution] = useState({code: "AND", name: "Andorra"})
   const [urlValid, setUrlValid] = useState(false)
   const [flagURL, setFlagURL] = useState('https://countryflagsapi.com/svg/ZAF')
-  const [selectedCountries, setSelectedCountries] = useState([])
+  const [selectedCountries, setSelectedCountries] = useState([1000])
 
   
-
   useEffect(() => {
     const getRandomCountry = () => {
 
+      let s = selectedCountries
+  
       let randomNumber = Math.floor(Math.random() * countries.length)
   
       while (selectedCountries.includes(randomNumber)) {
@@ -23,29 +24,16 @@ function App() {
   
       setSelectedCountries((prevSelected) => [...prevSelected, randomNumber])
   
-      return countries[randomNumber]
+      setSolution(countries[randomNumber])
     }
-
-    while (!urlValid) {
-      setSolution(getRandomCountry())
-
-      const flagURL = `https://countryflagsapi.com/svg/${solution.code}`
-
-      fetch(flagURL)
-      .then(response => {
-        if (response.ok) {
-          setFlagURL(flagURL)
-          setUrlValid(true) 
-        } else {
-          setUrlValid(false) 
-        }
-      })
-    }
-  }, [selectedCountries, solution, urlValid])
+    
+    getRandomCountry()
+  }, [])
+  
   
   return (
     <div className="App">
-      {solution && <Flordle solution={solution} flagURL={flagURL}/>}
+      <Flordle solution={solution} flagURL={flagURL}/>
     </div>
   );
 }

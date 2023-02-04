@@ -4,7 +4,6 @@ const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
 const NUMBER_OF_TURNS = 5
-const MAX_WORD_LENGTH = 5
 
 const useFlordle = (solution) => {
     
@@ -15,9 +14,11 @@ const useFlordle = (solution) => {
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({})
 
+    const MAX_LETTERS = solution.name.length
+
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
     const formatGuess = () => {
-        const solutionArray = [...solution]
+        const solutionArray = [...solution.name]
 
         const formattedGuess = [...currentGuess].map((letter)=> {
             return {key: letter, colour: GREY}
@@ -96,7 +97,7 @@ const useFlordle = (solution) => {
 
         // Check that the entered character is a letter
         if (/^[a-zA-Z]$/.test(key)) {
-            if(currentGuess.length < 5) {
+            if(currentGuess.length < MAX_LETTERS) {
                 setCurrentGuess((prev) => prev + key)
             }
         }
@@ -113,8 +114,8 @@ const useFlordle = (solution) => {
                 return
             }
 
-            if (currentGuess.length !== MAX_WORD_LENGTH) {
-                console.log(`Guess must be ${MAX_WORD_LENGTH} letters long`);
+            if (currentGuess.length !== solution.name.length) {
+                console.log(`Guess must be ${solution.name.length} letters long`);
                 return
             }
 
@@ -124,7 +125,7 @@ const useFlordle = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, NUMBER_OF_TURNS}
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, NUMBER_OF_TURNS, MAX_LETTERS}
 }
 
 export default useFlordle 
