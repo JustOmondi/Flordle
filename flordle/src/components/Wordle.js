@@ -4,13 +4,18 @@ import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 
 export default function Wordle({solution}) {
-    const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys} = useWordle(solution)
+    const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS} = useWordle(solution)
 
     useEffect(() => {
         window.addEventListener('keyup', handleKeyup)
 
+        // Stop processing key events if correct answer given or number of turns reached
+        if (isCorrect || turn > NUMBER_OF_TURNS-1) {
+          window.removeEventListener('keyup', handleKeyup)
+        }
+
         return () => window.removeEventListener('keyup', handleKeyup)
-    }, [handleKeyup])
+    }, [handleKeyup, isCorrect, turn, NUMBER_OF_TURNS])
 
     useEffect(() => {
       console.log(guesses, turn, isCorrect);

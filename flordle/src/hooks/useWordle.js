@@ -3,14 +3,14 @@ import {useState} from 'react'
 const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
-const NUMBER_OF_GUESSES = 6
+const NUMBER_OF_TURNS = 6
 const MAX_WORD_LENGTH = 5
 
 const useWordle = (solution) => {
     
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
-    const [guesses, setGuesses] = useState([...Array(NUMBER_OF_GUESSES)]) // Array of all the guesses made
+    const [guesses, setGuesses] = useState([...Array(NUMBER_OF_TURNS)]) // Array of all the guesses made
     const [history, setHistory] = useState([])
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({})
@@ -94,7 +94,7 @@ const useWordle = (solution) => {
             setCurrentGuess((prev) => prev.slice(0, -1))
         }
 
-        // Check that the entered is a valid letter
+        // Check that the entered character is a letter
         if (/^[a-zA-Z]$/.test(key)) {
             if(currentGuess.length < 5) {
                 setCurrentGuess((prev) => prev + key)
@@ -103,7 +103,7 @@ const useWordle = (solution) => {
 
         // Add new guess if turns < 5 and current guess has not been entered before
         if (key === 'Enter') {
-            if (turn > NUMBER_OF_GUESSES) {
+            if (turn > NUMBER_OF_TURNS) {
                 console.log('All turns have been used up');
                 return
             }
@@ -124,7 +124,7 @@ const useWordle = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, NUMBER_OF_TURNS}
 }
 
 export default useWordle 
