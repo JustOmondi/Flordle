@@ -8,14 +8,12 @@ function App() {
   const [solution, setSolution] = useState({code: "AND", name: "Andorra"})
   const [urlValid, setUrlValid] = useState(false)
   const [flagURL, setFlagURL] = useState('https://countryflagsapi.com/svg/ZAF')
-  const [selectedCountries, setSelectedCountries] = useState([1000])
+  const [selectedCountries, setSelectedCountries] = useState([])
 
   
   useEffect(() => {
     const getRandomCountry = () => {
-
-      let s = selectedCountries
-  
+ 
       let randomNumber = Math.floor(Math.random() * countries.length)
   
       while (selectedCountries.includes(randomNumber)) {

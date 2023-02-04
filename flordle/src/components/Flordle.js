@@ -19,14 +19,7 @@ export default function Flordle({solution, flagURL}) {
 
         return () => window.removeEventListener('keyup', handleKeyup)
     }, [handleKeyup, isCorrect, turn, NUMBER_OF_TURNS])
-
-    useEffect(() => {
-      console.log(guesses, turn, isCorrect);
     
-
-    }, [guesses, isCorrect, turn])
-    
-
   return (
     <div>
         <h3> Solution is = {solution.name}</h3>

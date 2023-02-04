@@ -18,7 +18,7 @@ const useFlordle = (solution) => {
 
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
     const formatGuess = () => {
-        const solutionArray = [...solution.name]
+        const solutionArray = [...solution.name.toLowerCase()]
 
         const formattedGuess = [...currentGuess].map((letter)=> {
             return {key: letter, colour: GREY}
@@ -46,7 +46,7 @@ const useFlordle = (solution) => {
 
     // Add a new guess to the running list of guesses and update the turn
     const addNewGuess = (formattedGuess) => {
-        if (currentGuess === solution) {
+        if (currentGuess.toLowerCase() === solution.name.toLowerCase()) {
             setIsCorrect(true);
         }
 
@@ -98,13 +98,13 @@ const useFlordle = (solution) => {
         // Check that the entered character is a letter
         if (/^[a-zA-Z]$/.test(key)) {
             if(currentGuess.length < MAX_LETTERS) {
-                setCurrentGuess((prev) => prev + key)
+                setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}${key}`.toLowerCase())
             }
         }
 
         // Add new guess if turns < 5 and current guess has not been entered before
         if (key === 'Enter') {
-            if (turn > NUMBER_OF_TURNS) {
+            if (turn >= NUMBER_OF_TURNS) {
                 console.log('All turns have been used up');
                 return
             }
@@ -114,7 +114,7 @@ const useFlordle = (solution) => {
                 return
             }
 
-            if (currentGuess.length !== solution.name.length) {
+            if (currentGuess.length !== MAX_LETTERS) {
                 console.log(`Guess must be ${solution.name.length} letters long`);
                 return
             }
