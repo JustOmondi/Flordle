@@ -3,10 +3,10 @@ import {useState} from 'react'
 const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
-const NUMBER_OF_TURNS = 6
+const NUMBER_OF_TURNS = 5
 const MAX_WORD_LENGTH = 5
 
-const useWordle = (solution) => {
+const useFlordle = (solution) => {
     
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
@@ -127,4 +127,4 @@ const useWordle = (solution) => {
     return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, NUMBER_OF_TURNS}
 }
 
-export default useWordle 
+export default useFlordle 

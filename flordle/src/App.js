@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from'react';
-import Wordle from './components/Wordle';
+import Flordle from './components/Flordle';
 
 function App() {
   const [solution, setSolution] = useState(null)
@@ -18,8 +18,7 @@ function App() {
   
   return (
     <div className="App">
-      <h1>Wordle</h1>
-      {solution && <Wordle solution={solution}/>}
+      {solution && <Flordle solution={solution}/>}
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import useWordle from '../hooks/useWordle'
+import useFlordle from '../hooks/useFlordle'
 import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import Modal from './Modal'
 
-export default function Wordle({solution}) {
-    const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS} = useWordle(solution)
+export default function Flordle({solution}) {
+    const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS} = useFlordle(solution)
     const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
