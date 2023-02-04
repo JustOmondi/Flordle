@@ -4,7 +4,7 @@ import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import Modal from './Modal'
 
-export default function Flordle({solution}) {
+export default function Flordle({solution, flagURL}) {
     const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS} = useFlordle(solution)
     const [showModal, setShowModal] = useState(false)
 
@@ -29,7 +29,8 @@ export default function Flordle({solution}) {
 
   return (
     <div>
-        <h3> Solution is = {solution}</h3>
+        <h3> Solution is = {solution.name}</h3>
+        <img src={flagURL} alt="flag"/>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn}/>
         <Keypad usedKeys={usedKeys}/>
         {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
