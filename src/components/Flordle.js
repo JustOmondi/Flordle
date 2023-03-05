@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useFlordle from '../hooks/useFlordle'
 import Grid from './Grid.js'
 import Keypad from './Keypad.js'
-import Modal from './Modal'
+import GameOverModal from './GameOverModal'
 
 export default function Flordle({solution, flagURL}) {
     const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS, MAX_LETTERS} = useFlordle(solution)
@@ -26,7 +26,7 @@ export default function Flordle({solution, flagURL}) {
         <img src={flagURL} alt="flag"/>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS}/>
         <Keypad usedKeys={usedKeys}/>
-        {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
+        {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
     </div>
   )
 }

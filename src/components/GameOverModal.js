@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Modal({isCorrect, turn, solution}) {
+export default function GameOverModal({isCorrect, turn, solution}) {
 
   return (
     <div className='modal'>
