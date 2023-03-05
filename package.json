@@ -2,6 +2,7 @@
   "name": "flordle",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000/api",
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
@@ -38,6 +39,9 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.2.7"
   }
 }
