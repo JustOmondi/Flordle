@@ -163,7 +163,7 @@ export const countries = [
     {code: 'VNM', name: 'Vietnam', code2: 'VN'},
     {code: 'YEM', name: 'Yemen', code2: 'YE'},
     {code: 'ZMB', name: 'Zambia', code2: 'ZM'},
-    {code: 'ZWE', name: 'Zimbabwe', code2: 'ZW'},
+    {code: 'ZWE', name: 'Zimbabwe', code2: 'ZW'}
 ]
 
 export const keypadLetters = [

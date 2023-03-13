@@ -6,7 +6,7 @@ export default function Row({guess, currentGuess, maxLetters}) {
         return (
             <div className="row past">
                 {guess.map((letter, i) => {
-                    return <div key={i} className={letter.colour}>{letter.key}</div>
+                    return <div key={i} className={`${letter.colour} rounded-xl`}>{letter.key}</div>
                 })}
             </div>
         ) 
@@ -19,9 +19,9 @@ export default function Row({guess, currentGuess, maxLetters}) {
             <div className="row current">
                 {currentGuessLetters.map((letter, i) => {
                     if (letter === " ") {
-                        return <div key={i}>{letter}</div>
+                        return <div className="rounded-xl" key={i}>{letter}</div>
                     }
-                    return <div className="filled" key={i}>{letter}</div>
+                    return <div className="filled rounded-xl" key={i}>{letter}</div>
                 })}
             </div>
         )
@@ -30,7 +30,7 @@ export default function Row({guess, currentGuess, maxLetters}) {
     return (
         <div className="row">
             {Array(maxLetters).fill(' ').map((letter, i) => {
-                return <div key={i}></div>
+                return <div className='rounded-xl' key={i}></div>
             })}
         </div>
     )

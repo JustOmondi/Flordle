@@ -4,9 +4,11 @@ import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import GameOverModal from './GameOverModal'
 
-export default function Flordle({solution, flagURL}) {
+export default function Flordle({solution}) {
     const {currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys, NUMBER_OF_TURNS, MAX_LETTERS} = useFlordle(solution)
     const [showModal, setShowModal] = useState(false)
+
+    const flagURL = `/flags/${solution.code2.toLowerCase()}.svg`;
 
     useEffect(() => {
         window.addEventListener('keyup', handleKeyup)
@@ -23,7 +25,9 @@ export default function Flordle({solution, flagURL}) {
   return (
     <div>
         <h3> Solution is = {solution.name}</h3>
-        <img src={flagURL} alt="flag"/>
+        <div className='flex p-8 content-center justify-center items-center'>
+          <img src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
+        </div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS}/>
         <Keypad usedKeys={usedKeys}/>
         {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
