@@ -1,5 +1,6 @@
 import {useState} from 'react'
 
+
 const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'grey'
@@ -15,6 +16,17 @@ const useFlordle = (solution) => {
     const [usedKeys, setUsedKeys] = useState({})
 
     const MAX_LETTERS = solution.name.length
+
+    const flagURL = `/flags/${solution.code2.toLowerCase()}.svg`;
+
+    const resetGame = () => {
+        setGuesses([...Array(NUMBER_OF_TURNS)])
+        setTurn(0);
+        setCurrentGuess('');
+        setHistory([]);
+        setIsCorrect(false);
+        setUsedKeys({})
+    }
 
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
     const formatGuess = () => {
@@ -125,7 +137,18 @@ const useFlordle = (solution) => {
         }
     }
 
-    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, NUMBER_OF_TURNS, MAX_LETTERS}
+    return {
+        turn,
+        currentGuess,
+        guesses,
+        isCorrect,
+        usedKeys,
+        flagURL,
+        handleKeyup,
+        NUMBER_OF_TURNS,
+        MAX_LETTERS,
+        resetGame
+    }
 }
 
 export default useFlordle 

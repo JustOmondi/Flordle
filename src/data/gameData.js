@@ -192,5 +192,6 @@ export const keypadLetters = [
     {key: "w"},
     {key: "x"},
     {key: "y"},
-    {key: "z"}
+    {key: "z"},
+    {key: "Space"}
 ]
