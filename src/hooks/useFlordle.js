@@ -30,11 +30,13 @@ const useFlordle = (solution) => {
 
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
     const formatGuess = () => {
-        const solutionArray = [...solution.name.toLowerCase()]
+        const solutionArray = [...solution.name.toLowerCase().replaceAll(" ", "_")]
 
         const formattedGuess = [...currentGuess].map((letter)=> {
             return {key: letter, colour: GREY}
         })
+
+        console.log(formattedGuess);
 
 
         // Step 1: Find letters guessed that are in the right position
@@ -75,6 +77,8 @@ const useFlordle = (solution) => {
         setUsedKeys((prev) => {
             const newUsedKeys = {...prev}
 
+            console.log(newUsedKeys)
+
             formattedGuess.forEach((letter, i) => {
                 const currentColour = newUsedKeys[letter.key]
 
@@ -111,6 +115,13 @@ const useFlordle = (solution) => {
         if (/^[a-zA-Z]$/.test(key)) {
             if(currentGuess.length < MAX_LETTERS) {
                 setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}${key}`.toLowerCase())
+            }
+        }
+
+        // Check that the entered character is Space
+        if (key === ' ') {
+            if(currentGuess.length < MAX_LETTERS) {
+                setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}_`.toLowerCase())
             }
         }
 

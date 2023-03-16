@@ -3,7 +3,7 @@ import useFlordle from '../hooks/useFlordle'
 import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import GameOverModal from './GameOverModal'
-
+import { InformationCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 export default function Flordle({solution, skipToNext}) {
   const [showModal, setShowModal] = useState(false)
@@ -40,11 +40,29 @@ export default function Flordle({solution, skipToNext}) {
     
   return (
     <div>
-        <h3> Solution is = {solution.name}</h3>
-        <div className='flex p-8 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
+        <header className="bg-white border-b-2 border-grey-300 mb-2">
+          <nav className="mx-auto flex w-1/4 justify-between p-2 lg:px-4" aria-label="Global">
+            <div className="flex lg:flex-1">
+              <a href="#" className="-m-1.5 p-1.5">
+                <p className="">Flordle: {solution.name}</p>
+              </a>
+            </div>
+            <div className='flex'>
+              <div className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
+                <span className="sr-only">View notifications</span>
+                <InformationCircleIcon className="h-6 w-6 mr-3" />
+              </div>
+              <div onClick={handleSkip} className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
+                <span className="sr-only">View notifications</span>
+                <ArrowPathIcon className="h-6 w-6" />
+              </div>
+            </div>
+            
+          </nav>
+        </header>
+        <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
         </div>
-        <div onClick={handleSkip}>Skip</div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS}/>
         <Keypad usedKeys={usedKeys}/>
         {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
