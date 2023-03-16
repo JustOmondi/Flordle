@@ -7,7 +7,7 @@ export default function Keypad({usedKeys}) {
     <div className='keypad'>
         {keypadLetters && keypadLetters.map((letter, i) => { 
             const color = usedKeys[letter.key]
-            return <div key={i} className={color}>{letter.key}</div>
+            return <div key={i} className={`${color} text-xl uppercase border rounded-xl m-1`}>{letter.key}</div>
         })}
     </div>
   )

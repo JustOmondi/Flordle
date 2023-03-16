@@ -3,7 +3,7 @@ import {useState} from 'react'
 
 const GREEN = 'green'
 const YELLOW = 'yellow'
-const GREY = 'grey'
+const GREY = 'gray'
 const NUMBER_OF_TURNS = 5
 
 const useFlordle = (solution) => {

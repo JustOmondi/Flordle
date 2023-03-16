@@ -41,10 +41,10 @@ export default function Flordle({solution, skipToNext}) {
   return (
     <div>
         <h3> Solution is = {solution.name}</h3>
-        <div className='flex p-8 content-center justify-center items-center drop-shadow-lg rounded-xl'>
-          <img classname="rounded-xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
+        <div className='flex p-8 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
+          <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
         </div>
-        <button onClick={handleSkip}>Skip</button>
+        <div onClick={handleSkip}>Skip</div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS}/>
         <Keypad usedKeys={usedKeys}/>
         {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
