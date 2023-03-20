@@ -42,8 +42,8 @@ h1 {
 }
 
 .row > div.green, .keypad > div.green {
-  border-color: #84cc16;
-  background-color: #bef264;
+  border-color: #16a34a;
+  background-color: #22c55e;
   transition: all 0.3s ease-in;
 }
 .row > div.gray, .keypad > div.gray {
@@ -51,6 +51,12 @@ h1 {
   background-color: #cbd5e1;
   transition: all 0.3s ease-in;
 }
+.keypad > div.selected-gray {
+  border-color: #6b7280;
+  background-color: #9ca3af;
+  transition: all 0.3s ease-in;
+}
+
 .row > div.yellow, .keypad > div.yellow {
   border-color: #eab308;
   background-color: #fef08a;
@@ -126,4 +132,9 @@ h1 {
     transform: scale(1);
     border-color: #94a3b8;
   }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

@@ -63,7 +63,7 @@ export default function Flordle({solution, skipToNext}) {
         <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
         </div>
-        <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS}/>
+        <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solution={solution.name}/>
         <Keypad usedKeys={usedKeys}/>
         {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
     </div>

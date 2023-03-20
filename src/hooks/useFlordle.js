@@ -1,9 +1,10 @@
 import {useState} from 'react'
-
+import { keypadLetters } from '../data/gameData'
 
 const GREEN = 'green'
 const YELLOW = 'yellow'
 const GREY = 'gray'
+const SELECTED_GREY = 'selected-gray'
 const NUMBER_OF_TURNS = 5
 
 const useFlordle = (solution) => {
@@ -13,7 +14,7 @@ const useFlordle = (solution) => {
     const [guesses, setGuesses] = useState([...Array(NUMBER_OF_TURNS)]) // Array of all the guesses made
     const [history, setHistory] = useState([])
     const [isCorrect, setIsCorrect] = useState(false)
-    const [usedKeys, setUsedKeys] = useState({})
+    const [usedKeys, setUsedKeys] = useState(keypadLetters)
 
     const MAX_LETTERS = solution.name.length
 
@@ -25,7 +26,7 @@ const useFlordle = (solution) => {
         setCurrentGuess('');
         setHistory([]);
         setIsCorrect(false);
-        setUsedKeys({})
+        setUsedKeys(keypadLetters)
     }
 
     //Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
@@ -35,9 +36,6 @@ const useFlordle = (solution) => {
         const formattedGuess = [...currentGuess].map((letter)=> {
             return {key: letter, colour: GREY}
         })
-
-        console.log(formattedGuess);
-
 
         // Step 1: Find letters guessed that are in the right position
         formattedGuess.forEach((letter, i) => {
@@ -77,26 +75,31 @@ const useFlordle = (solution) => {
         setUsedKeys((prev) => {
             const newUsedKeys = {...prev}
 
-            console.log(newUsedKeys)
-
             formattedGuess.forEach((letter, i) => {
-                const currentColour = newUsedKeys[letter.key]
 
-                if (letter.colour === GREEN) {
-                    newUsedKeys[letter.key] = GREEN
-                    return
-                }
+                // Only check for color if the key is not a space
+                if(letter.key !== ' ') {
+                    const currentColour = newUsedKeys[letter.key].color
 
-                if (letter.colour === YELLOW && currentColour !== GREEN) {
-                    newUsedKeys[letter.key] = YELLOW
-                    return
-                }
+                    if (letter.colour === GREEN) {
+                        newUsedKeys[letter.key] = {value: letter.key, color: GREEN}
+                        return
+                    }
 
-                if (letter.colour === GREY && currentColour !== GREEN && currentColour !== YELLOW) {
-                    newUsedKeys[letter.key] = GREY
-                    return
+                    if (letter.colour === YELLOW && currentColour !== GREEN) {
+                        newUsedKeys[letter.key] = {value: letter.key, color: YELLOW}
+                        return
+                    }
+
+                    if (letter.colour === GREY && currentColour !== GREEN && currentColour !== YELLOW) {
+                        newUsedKeys[letter.key] = {value: letter.key, color: SELECTED_GREY}
+                        return
+                    }
                 }
             })
+
+            console.log('Used keys')
+            console.dir(newUsedKeys)
 
             return newUsedKeys
         })
@@ -108,20 +111,23 @@ const useFlordle = (solution) => {
     //Handle keyup events i.e. when letters are pressed or Enter is pressed
     const handleKeyup = ({key}) => {
         if (key === 'Backspace') {
-            setCurrentGuess((prev) => prev.slice(0, -1))
+            // Check if last character was space and delete last 2 characters
+            if(currentGuess.indexOf(' ') === currentGuess.length-1) {
+                setCurrentGuess((prev) => prev.slice(0, -2))
+            } else {
+                setCurrentGuess((prev) => prev.slice(0, -1))
+            }
         }
 
         // Check that the entered character is a letter
         if (/^[a-zA-Z]$/.test(key)) {
             if(currentGuess.length < MAX_LETTERS) {
-                setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}${key}`.toLowerCase())
-            }
-        }
-
-        // Check that the entered character is Space
-        if (key === ' ') {
-            if(currentGuess.length < MAX_LETTERS) {
-                setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}_`.toLowerCase())
+                // Check if the next character at the current index of the current guess in the solution is a space and add space in current guess
+                if(solution.name.indexOf(' ') === currentGuess.length) {
+                    setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess} ${key}`.toLowerCase())
+                } else {
+                    setCurrentGuess((prevCurrentGuess) => `${prevCurrentGuess}${key}`.toLowerCase());
+                }
             }
         }
 
