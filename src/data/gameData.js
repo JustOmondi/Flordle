@@ -1,3 +1,5 @@
+const GREY = 'gray'
+
 export const countries = [
     {code: 'AFG', name: 'Afghanistan', code2: 'AF'},
     {code: 'ALB', name: 'Albania', code2: 'AL'},
@@ -166,32 +168,31 @@ export const countries = [
     {code: 'ZWE', name: 'Zimbabwe', code2: 'ZW'}
 ]
 
-export const keypadLetters = [
-    {key: "a"},
-    {key: "b"},
-    {key: "c"},
-    {key: "d"},
-    {key: "e"},
-    {key: "f"},
-    {key: "g"},
-    {key: "h"},
-    {key: "i"},
-    {key: "j"},
-    {key: "k"},
-    {key: "l"},
-    {key: "m"},
-    {key: "n"},
-    {key: "o"},
-    {key: "p"},
-    {key: "q"},
-    {key: "r"},
-    {key: "s"},
-    {key: "t"},
-    {key: "u"},
-    {key: "v"},
-    {key: "w"},
-    {key: "x"},
-    {key: "y"},
-    {key: "z"},
-    {key: "Space"}
-]
+export const keypadLetters = {
+    'a': {key: "a", color: GREY},
+    'b': {key: "b", color: GREY},
+    'c': {key: "c", color: GREY},
+    'd': {key: "d", color: GREY},
+    'e': {key: "e", color: GREY},
+    'f': {key: "f", color: GREY},
+    'g': {key: "g", color: GREY},
+    'h': {key: "h", color: GREY},
+    'i': {key: "i", color: GREY},
+    'j': {key: "j", color: GREY},
+    'k': {key: "k", color: GREY},
+    'l': {key: "l", color: GREY},
+    'm': {key: "m", color: GREY},
+    'n': {key: "n", color: GREY},
+    'o': {key: "o", color: GREY},
+    'p': {key: "p", color: GREY},
+    'q': {key: "q", color: GREY},
+    'r': {key: "r", color: GREY},
+    's': {key: "s", color: GREY},
+    't': {key: "t", color: GREY},
+    'u': {key: "u", color: GREY},
+    'v': {key: "v", color: GREY},
+    'w': {key: "w", color: GREY},
+    'x': {key: "x", color: GREY},
+    'y': {key: "y", color: GREY},
+    'z': {key: "z", color: GREY},
+}
