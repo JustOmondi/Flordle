@@ -20,7 +20,7 @@ const useFlordle = (solution) => {
 
     const flagURL = `/flags/${solution.code2.toLowerCase()}.svg`;
 
-    const resetGame = () => {
+    const resetState = () => {
         setGuesses([...Array(NUMBER_OF_TURNS)])
         setTurn(0);
         setCurrentGuess('');
@@ -98,9 +98,6 @@ const useFlordle = (solution) => {
                 }
             })
 
-            console.log('Used keys')
-            console.dir(newUsedKeys)
-
             return newUsedKeys
         })
 
@@ -164,7 +161,7 @@ const useFlordle = (solution) => {
         handleKeyup,
         NUMBER_OF_TURNS,
         MAX_LETTERS,
-        resetGame
+        resetState
     }
 }
 

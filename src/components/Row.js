@@ -16,8 +16,7 @@ export default function Row({guess, currentGuess, maxLetters, solution}) {
     }
 
     if (currentGuess) {
-        console.log(`Max letters: ${maxLetters}, Current guess length: ${currentGuess.length}`)
-        
+       
         let currentGuessLetters = [...currentGuess.split(''), ...Array(maxLetters - currentGuess.length).fill(' ')]
 
         return (

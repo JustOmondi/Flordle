@@ -16,13 +16,13 @@ export default function Flordle({solution, skipToNext}) {
     isCorrect,
     MAX_LETTERS,
     NUMBER_OF_TURNS,
-    resetGame,
+    resetState,
     turn,
     usedKeys
   } = useFlordle(solution)
 
-  function handleSkip() {
-    resetGame();
+  const resetGame = () => {
+    resetState();
     skipToNext();
   }
 
@@ -52,7 +52,7 @@ export default function Flordle({solution, skipToNext}) {
                 <span className="sr-only">View notifications</span>
                 <InformationCircleIcon className="h-6 w-6 mr-3" />
               </div>
-              <div onClick={handleSkip} className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
+              <div onClick={resetGame} className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
                 <span className="sr-only">View notifications</span>
                 <ArrowPathIcon className="h-6 w-6" />
               </div>
@@ -65,7 +65,7 @@ export default function Flordle({solution, skipToNext}) {
         </div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solution={solution.name}/>
         <Keypad usedKeys={usedKeys}/>
-        {showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} />}
+        {!showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} resetGame={resetGame}/>}
     </div>
   )
 }
