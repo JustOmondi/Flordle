@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useFlordle from '../hooks/useFlordle'
 import Grid from './Grid.js'
 import Keypad from './Keypad.js'
-import GameOverModal from './GameOverModal'
+import Modal from './Modal'
 import { InformationCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 export default function Flordle({solution, skipToNext}) {
@@ -24,6 +24,10 @@ export default function Flordle({solution, skipToNext}) {
   const resetGame = () => {
     resetState();
     skipToNext();
+  }
+
+  const hideModal = () => {
+    setShowModal(false);
   }
 
   useEffect(() => {
@@ -48,12 +52,12 @@ export default function Flordle({solution, skipToNext}) {
               </a>
             </div>
             <div className='flex'>
-              <div className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
-                <span className="sr-only">View notifications</span>
+              <div onClick={() => {setShowModal(true)}} className="pointer-events-auto rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
+                <span className="sr-only">Info</span>
                 <InformationCircleIcon className="h-6 w-6 mr-3" />
               </div>
-              <div onClick={resetGame} className="rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
-                <span className="sr-only">View notifications</span>
+              <div onClick={resetGame} className="pointer-events-auto rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
+                <span className="sr-only">Reset</span>
                 <ArrowPathIcon className="h-6 w-6" />
               </div>
             </div>
@@ -65,7 +69,15 @@ export default function Flordle({solution, skipToNext}) {
         </div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solution={solution.name}/>
         <Keypad usedKeys={usedKeys}/>
-        {!showModal && <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution.name} resetGame={resetGame}/>}
+        {showModal && (
+          <Modal 
+            isCorrect={isCorrect}
+            turn={turn}
+            solution={solution.name}
+            resetGame={resetGame}
+            maxTurnsReached={turn > NUMBER_OF_TURNS-1}
+            hideModal={hideModal}/>
+        )}
     </div>
   )
 }
