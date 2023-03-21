@@ -5,6 +5,7 @@ import Keypad from './Keypad.js'
 import Modal from './Modal'
 import Nav from './Nav'
 import { Toaster } from 'react-hot-toast'
+import ConfettiExplosion from 'react-confetti-explosion'
 
 export default function Flordle({solution, skipToNext}) {
   const [mainModalVisible, setMainModalVisible,] = useState(false)
@@ -69,6 +70,7 @@ export default function Flordle({solution, skipToNext}) {
             color: '#000',
           }}}/>
         </div>
+        {isCorrect && <ConfettiExplosion particleCount={200} height={'150vh'} width={3000} duration={3000}/>}
         <Nav showInfoModal={showInfoModal} resetGame={resetGame} solutionName={solution.name} />
         <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>

@@ -12,12 +12,12 @@ export default function Nav({showInfoModal, resetGame, solutionName}) {
             </div>
             <div className='flex'>
                 <div onClick={showInfoModal} className="pointer-events-auto rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
-                <span className="sr-only">Info</span>
-                <InformationCircleIcon className="h-6 w-6 mr-3" />
+                  <span className="sr-only">Info</span>
+                  <InformationCircleIcon className="h-6 w-6 mr-3" />
                 </div>
                 <div onClick={resetGame} className="pointer-events-auto rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">
-                <span className="sr-only">Reset</span>
-                <ArrowPathIcon className="h-6 w-6" />
+                  <span className="sr-only">Reset</span>
+                  <ArrowPathIcon className="h-6 w-6" />
                 </div>
             </div>
         </nav>

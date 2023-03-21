@@ -70,7 +70,7 @@ h1 {
 }
 
 .keypad > div.clickable:active {
-  transform: scale(0.8);
+  transform: scale(0.9);
 }
 
 .row > div:nth-child(2) {
