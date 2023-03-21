@@ -195,4 +195,6 @@ export const keypadLetters = {
     'x': {key: "x", color: GREY},
     'y': {key: "y", color: GREY},
     'z': {key: "z", color: GREY},
+    'Enter': {key: "Enter", color: GREY},
+    'Backspace': {key: "Backspace", color: GREY},
 }

@@ -63,6 +63,16 @@ h1 {
   transition: all 0.3s ease-in;
 }
 
+.keypad > div.clickable:hover {
+  background-color: #fff;
+  transition: all 0.1s ease-in;
+  border: 1px solid #6b7280;
+}
+
+.keypad > div.clickable:active {
+  transform: scale(0.8);
+}
+
 .row > div:nth-child(2) {
   animation-delay: 0.2s;
 }

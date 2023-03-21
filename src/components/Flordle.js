@@ -18,6 +18,7 @@ export default function Flordle({solution, skipToNext}) {
     isCorrect,
     MAX_LETTERS,
     NUMBER_OF_TURNS,
+    processKeyInput,
     resetState,
     turn,
     usedKeys
@@ -50,7 +51,7 @@ export default function Flordle({solution, skipToNext}) {
     window.addEventListener('keyup', handleKeyup)
 
     // Stop processing key events if correct answer given or number of turns reached
-    if (isCorrect || turn > NUMBER_OF_TURNS-1) {
+    if (isCorrect || turn > NUMBER_OF_TURNS - 1) {
       setTimeout(showMainModal, 500)
       window.removeEventListener('keyup', handleKeyup)
     }
@@ -73,7 +74,7 @@ export default function Flordle({solution, skipToNext}) {
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
         </div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name}/>
-        <Keypad usedKeys={usedKeys}/>
+        <Keypad usedKeys={usedKeys} processKeyInput={processKeyInput}/>
         {(mainModalVisible || infoModalVisible) && (
           <Modal 
             isCorrect={isCorrect}

@@ -2,10 +2,10 @@ import {useState} from 'react'
 import { keypadLetters } from '../data/gameData'
 import { toast } from 'react-hot-toast'
 
-const GREEN = 'green'
-const YELLOW = 'yellow'
-const GREY = 'gray'
-const SELECTED_GREY = 'selected-gray'
+export const GREEN = 'green'
+export const YELLOW = 'yellow'
+export const GREY = 'gray'
+export const SELECTED_GREY = 'selected-gray'
 const NUMBER_OF_TURNS = 5
 
 const useFlordle = (solution) => {
@@ -106,8 +106,7 @@ const useFlordle = (solution) => {
         setCurrentGuess('')
     }
 
-    //Handle keyup events i.e. when letters are pressed or Enter is pressed
-    const handleKeyup = ({key}) => {
+    const processKeyInput = (key) => {
         if (key === 'Backspace') {
             // Check if last character was space and delete last 2 characters
             if(currentGuess.indexOf(' ') === currentGuess.length-1) {
@@ -150,6 +149,13 @@ const useFlordle = (solution) => {
 
             addNewGuess(formattedGuess)
         }
+
+        console.log(currentGuess);
+    }
+
+    //Handle keyup events i.e. when letters are pressed or Enter is pressed
+    const handleKeyup = ({key}) => {
+        processKeyInput(key);
     }
 
     return {
@@ -160,6 +166,7 @@ const useFlordle = (solution) => {
         usedKeys,
         flagURL,
         handleKeyup,
+        processKeyInput,
         NUMBER_OF_TURNS,
         MAX_LETTERS,
         resetState
