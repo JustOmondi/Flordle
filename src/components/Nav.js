@@ -6,9 +6,7 @@ export default function Nav({showInfoModal, resetGame, solutionName}) {
     <header className="bg-white border-b-2 border-grey-300 mb-2">
         <nav className="mx-auto flex w-1/4 justify-between p-2 lg:px-4" aria-label="Global">
             <div className="flex lg:flex-1">
-                <a href="/" className="-m-1.5 p-1.5">
-                <p className="">Flordle: {solutionName}</p>
-                </a>
+              <p className="">Flordle</p>
             </div>
             <div className='flex'>
                 <div onClick={showInfoModal} className="pointer-events-auto rounded-full p-1 text-gray-400 hover:text-black focus:outline-none">

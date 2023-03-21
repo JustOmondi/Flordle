@@ -141,7 +141,12 @@ const useFlordle = (solution) => {
             }
 
             if (currentGuess.length !== MAX_LETTERS) {
-                toast(`Your guess must be ${solution.name.length} letters long`);
+                if(solution.name.includes(' ')) {
+                    toast(`Your guess must be ${solution.name.length - 1} letters long`);
+                } else {
+                    toast(`Your guess must be ${solution.name.length} letters long`);
+                }
+                
                 return;
             }
 

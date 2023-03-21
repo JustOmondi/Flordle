@@ -12,9 +12,11 @@ export default function GameOver({solutionName, isCorrect, turn, onDialogClosed}
             <React.Fragment>
                 <Dialog.Title className="text-xl bold text-center pb-3 font-medium leading-6">You win!</Dialog.Title>
                 <div className="mt-2 text-center">
-                <p>The solution was <span className='text-green-700 bold'>{solutionName}</span></p>
-                <p className='text-gray-500 mt-3'>You found the solution in <span className='bold'>{turn}</span> guesses</p>
+                    <p>The solution was <span className='text-green-700 bold'>{solutionName}</span></p>
+                    <p className='text-gray-500 mt-3'>You found the solution in <span className='bold'>{turn}</span>{(turn > 1) ? ' guesses' : ' guess'}</p>
+                    <button onClick={() => onDialogClosed(true)} className='text-center mt-5 bg-gray-300 hover:bg-white p-3 border-2 rounded-lg'>Try another one</button>
                 </div>
+                
             </React.Fragment>  
         )}
         {!isCorrect && (
