@@ -4,6 +4,7 @@ import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import Modal from './Modal'
 import Nav from './Nav'
+import { Toaster } from 'react-hot-toast'
 
 export default function Flordle({solution, skipToNext}) {
   const [mainModalVisible, setMainModalVisible,] = useState(false)
@@ -59,6 +60,14 @@ export default function Flordle({solution, skipToNext}) {
     
   return (
     <div>
+        <div><Toaster toastOptions={{
+          className: '',
+          duration: 2000,
+          style: {
+            background: '#fef3c7',
+            color: '#000',
+          }}}/>
+        </div>
         <Nav showInfoModal={showInfoModal} resetGame={resetGame} solutionName={solution.name} />
         <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>

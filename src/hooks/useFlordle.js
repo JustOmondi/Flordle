@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import { keypadLetters } from '../data/gameData'
+import { toast } from 'react-hot-toast'
 
 const GREEN = 'green'
 const YELLOW = 'yellow'
@@ -131,18 +132,18 @@ const useFlordle = (solution) => {
         // Add new guess if turns < 5 and current guess has not been entered before
         if (key === 'Enter') {
             if (turn >= NUMBER_OF_TURNS) {
-                console.log('All turns have been used up');
-                return
+                toast('All turns have been used up');
+                return;
             }
 
             if (history.includes(currentGuess)) {
-                console.log('You\'ve already guessed this word');
-                return
+                toast('You\'ve already guessed this word');
+                return;
             }
 
             if (currentGuess.length !== MAX_LETTERS) {
-                console.log(`Guess must be ${solution.name.length} letters long`);
-                return
+                toast(`Your guess must be ${solution.name.length} letters long`);
+                return;
             }
 
             const formattedGuess = formatGuess()
