@@ -5,7 +5,7 @@ import { Dialog, Transition  } from '@headlessui/react'
 import GameOver from './modals/GameOver'
 import HowToPlay from './modals/HowToPlay'
 
-export default function GameOverModal({isCorrect, maxTurnsReached, turn, solutionName, resetGame, hideMainModal}) {
+export default function Modal({isCorrect, infoModalVisible, hideInfoModal, hideMainModal, turn, solutionName, resetGame}) {
 
     let [isOpen, setIsOpen] = useState(true)
 
@@ -14,14 +14,15 @@ export default function GameOverModal({isCorrect, maxTurnsReached, turn, solutio
     }
 
     async function onDialogClosed (reset) {
-        setIsOpen(false);
-        hideMainModal()
+        setIsOpen(false);       
 
         if (reset) {
             // Add delay otherwise game is reset before dialog disappears
             await delay(700);
             resetGame();
-        }  
+        } else {
+            hideInfoModal(); 
+        }
     }
 
     return (
@@ -42,10 +43,10 @@ export default function GameOverModal({isCorrect, maxTurnsReached, turn, solutio
 
                 {/* Full-screen container to center the panel */}
                 <div className="fixed inset-0 flex items-center justify-center p-4">
-                    {maxTurnsReached && (
+                    {!infoModalVisible && (
                         <GameOver solutionName={solutionName} isCorrect={isCorrect} turn={turn} onDialogClosed={onDialogClosed}/>
                     )}
-                    {(!maxTurnsReached && !isCorrect) && (
+                    {infoModalVisible && (
                         <HowToPlay onDialogClosed={onDialogClosed}/>
                     )}
                 </div>

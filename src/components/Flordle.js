@@ -6,7 +6,8 @@ import Modal from './Modal'
 import Nav from './Nav'
 
 export default function Flordle({solution, skipToNext}) {
-  const [showModal, setShowModal] = useState(false)
+  const [mainModalVisible, setMainModalVisible,] = useState(false)
+  const [infoModalVisible, setInfoModalVisible] = useState(false)
   
   const {
     currentGuess,
@@ -22,16 +23,26 @@ export default function Flordle({solution, skipToNext}) {
   } = useFlordle(solution)
 
   const resetGame = () => {
+    hideMainModal();
+    hideInfoModal();
     resetState();
     skipToNext();
   }
 
-  const hideMainModal = () => {
-    setShowModal(false);
+  const showMainModal = () => {
+    setMainModalVisible(true);
   }
 
-  const showMainModal = () => {
-    setShowModal(true);
+  const hideMainModal = () => {
+    setMainModalVisible(false);
+  }
+
+  const hideInfoModal = () => {
+    setInfoModalVisible(false);
+  }
+
+  const showInfoModal = () => {
+    setInfoModalVisible(true);
   }
 
   useEffect(() => {
@@ -39,7 +50,7 @@ export default function Flordle({solution, skipToNext}) {
 
     // Stop processing key events if correct answer given or number of turns reached
     if (isCorrect || turn > NUMBER_OF_TURNS-1) {
-      setTimeout(()=> setShowModal(true), 500)
+      setTimeout(showMainModal, 500)
       window.removeEventListener('keyup', handleKeyup)
     }
 
@@ -48,20 +59,21 @@ export default function Flordle({solution, skipToNext}) {
     
   return (
     <div>
-        <Nav showMainModal={showMainModal} resetGame={resetGame} solutionName={solution.name} />
+        <Nav showInfoModal={showInfoModal} resetGame={resetGame} solutionName={solution.name} />
         <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
           <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
         </div>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name}/>
         <Keypad usedKeys={usedKeys}/>
-        {showModal && (
+        {(mainModalVisible || infoModalVisible) && (
           <Modal 
             isCorrect={isCorrect}
             turn={turn}
             solutionName={solution.name}
             resetGame={resetGame}
-            maxTurnsReached={turn > NUMBER_OF_TURNS-1}
-            hideMainModal={hideMainModal}/>
+            infoModalVisible={infoModalVisible}
+            hideMainModal={hideMainModal}
+            hideInfoModal={hideInfoModal}/>
         )}
     </div>
   )
