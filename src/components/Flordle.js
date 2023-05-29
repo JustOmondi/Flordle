@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import ConfettiExplosion from 'react-confetti-explosion'
+import { Toaster } from 'react-hot-toast'
 import useFlordle from '../hooks/useFlordle'
+import { getCookie, setCookie } from '../utils'
 import Grid from './Grid.js'
 import Keypad from './Keypad.js'
 import Modal from './Modal'
 import Nav from './Nav'
-import { Toaster } from 'react-hot-toast'
-import ConfettiExplosion from 'react-confetti-explosion'
 
-export default function Flordle({solution, skipToNext}) {
+export default function Flordle({ solution, skipToNext }) {
   const [mainModalVisible, setMainModalVisible,] = useState(false)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
-  
+
   const {
     currentGuess,
     handleKeyup,
@@ -49,6 +50,12 @@ export default function Flordle({solution, skipToNext}) {
   }
 
   useEffect(() => {
+    // Use cookie to determine whether to show/hide info modal when app loaded
+    if (!getCookie()) {
+      setInfoModalVisible(true);
+      setCookie()
+    }
+
     window.addEventListener('keyup', handleKeyup)
 
     // Stop processing key events if correct answer given or number of turns reached
@@ -59,34 +66,35 @@ export default function Flordle({solution, skipToNext}) {
 
     return () => window.removeEventListener('keyup', handleKeyup)
   }, [handleKeyup, isCorrect, turn, NUMBER_OF_TURNS])
-    
+
   return (
     <div>
-        <div><Toaster toastOptions={{
-          className: '',
-          duration: 2000,
-          style: {
-            background: '#fef3c7',
-            color: '#000',
-          }}}/>
-        </div>
-        {isCorrect && <ConfettiExplosion particleCount={200} height={'150vh'} width={3000} duration={3000}/>}
-        <Nav showInfoModal={showInfoModal} resetGame={resetGame} solutionName={solution.name} />
-        <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
-          <img className="rounded-2xl" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag"/>
-        </div>
-        <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name}/>
-        <Keypad usedKeys={usedKeys} processKeyInput={processKeyInput}/>
-        {(mainModalVisible || infoModalVisible) && (
-          <Modal 
-            isCorrect={isCorrect}
-            turn={turn}
-            solutionName={solution.name}
-            resetGame={resetGame}
-            infoModalVisible={infoModalVisible}
-            hideMainModal={hideMainModal}
-            hideInfoModal={hideInfoModal}/>
-        )}
+      <div><Toaster toastOptions={{
+        className: '',
+        duration: 2000,
+        style: {
+          background: '#fef3c7',
+          color: '#000',
+        }
+      }} />
+      </div>
+      {isCorrect && <ConfettiExplosion particleCount={200} height={'150vh'} width={3000} duration={3000} />}
+      <Nav showInfoModal={showInfoModal} resetGame={resetGame} flagCode={solution.code2} />
+      <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
+        <img className="rounded-2xl w-1/3 lg:w-1/12" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag" />
+      </div>
+      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name} />
+      <Keypad usedKeys={usedKeys} processKeyInput={processKeyInput} />
+      {(mainModalVisible || infoModalVisible) && (
+        <Modal
+          isCorrect={isCorrect}
+          turn={turn}
+          solutionName={solution.name}
+          resetGame={resetGame}
+          infoModalVisible={infoModalVisible}
+          hideMainModal={hideMainModal}
+          hideInfoModal={hideInfoModal} />
+      )}
     </div>
   )
 }
