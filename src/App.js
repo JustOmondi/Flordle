@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import Flordle from './components/Flordle';
 import { countries } from './data/gameData.js';
 

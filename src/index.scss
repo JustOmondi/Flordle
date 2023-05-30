@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$yellow-bg: #fef08a;
+$yellow-border: #eab308;
+$gray-bg: #cbd5e1;
+$gray-border: #9ca3af;
+$green-bg: #22c55e;
+$green-border: #16a34a;
+$selected-gray-bg: #9ca3af;
+$selected-gray-border: #6b7280;
+
+@mixin coloured-key-transition {
+  transition: all 0.3s ease-in;
+}
+
+img {
+  width: 8%;
+  height: auto;
+}
+
+body {
+  text-align: center;
+  font-size: 1em;
+  font-family: verdana;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.2em;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  margin: 0 0 30px 0;
+  color: #333;
+}
+
+/* Letter Rows */
+.row {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+  &.current .filled {
+    animation: bounce 0.1s ease-in-out forwards;
+  }
+
+  /* Row blocks */
+  >div {
+    text-align: center;
+  }
+
+  .clickable:hover {
+    background-color: #fff;
+    transition: all 0.1s ease-in;
+    border: 1px solid #6b7280;
+  }
+
+  .clickable:active {
+    transform: scale(0.9);
+  }
+
+  .filled {
+    border-color: #9ca3af;
+    background-color: #fff;
+  }
+
+  .green {
+    border-color: $green-border;
+    background-color: $green-bg;
+    @include coloured-key-transition
+  }
+
+  .gray {
+    border-color: $gray-border;
+    background-color: $gray-bg;
+    @include coloured-key-transition
+  }
+
+  .yellow {
+    border-color: $yellow-border;
+    background-color: $yellow-bg;
+    @include coloured-key-transition
+  }
+}
+
+/* keypad */
+.keypad {
+  max-width: 700px;
+  margin: 20px auto;
+
+  >div {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 50px;
+    background: #eee;
+    display: inline-block;
+    line-height: 50px;
+  }
+
+  .green {
+    border-color: $green-border;
+    background-color: $green-bg;
+    @include coloured-key-transition
+  }
+
+  .gray {
+    border-color: $gray-border;
+    background-color: $gray-bg;
+    @include coloured-key-transition
+  }
+
+  .selected-gray {
+    border-color: $selected-gray-border;
+    background-color: $selected-gray-bg;
+    @include coloured-key-transition
+  }
+
+  .yellow {
+    border-color: $yellow-border;
+    background-color: $yellow-bg;
+    @include coloured-key-transition
+  }
+
+  .clickable:hover {
+    background-color: #fff;
+    transition: all 0.1s ease-in;
+    border: 1px solid #6b7280;
+  }
+
+  .clickable:active {
+    transform: scale(0.9);
+  }
+}
+
+/* Modal */
+.modal {
+  background: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  div {
+    max-width: 480px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 10% auto;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .solution {
+    color: #ff004c;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+    border-color: #e2e8f0;
+  }
+
+  50% {
+    transform: scale(1.1);
+    border-color: #e2e8f0;
+  }
+
+  100% {
+    transform: scale(1);
+    border-color: #94a3b8;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
