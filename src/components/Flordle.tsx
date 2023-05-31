@@ -3,14 +3,23 @@ import ConfettiExplosion from 'react-confetti-explosion'
 import { Toaster } from 'react-hot-toast'
 import useFlordle from '../hooks/useFlordle'
 import { getCookie, setCookie } from '../utils'
-import Grid from './Grid.js'
-import Keypad from './Keypad.js'
+import Grid from './Grid'
+import Keypad from './Keypad'
 import Modal from './Modal'
 import Nav from './Nav'
 
-export default function Flordle({ solution, skipToNext }) {
-  const [mainModalVisible, setMainModalVisible,] = useState(false)
-  const [infoModalVisible, setInfoModalVisible] = useState(false)
+interface Props {
+  solution: {
+    name: string,
+    code: string,
+    code2: string
+  },
+  skipToNext: () => void
+}
+
+ const Flordle: React.FC<Props> = ({ solution, skipToNext }) => {
+  const [mainModalVisible, setMainModalVisible,] = useState<boolean>(false)
+  const [infoModalVisible, setInfoModalVisible] = useState<boolean>(false)
 
   const {
     currentGuess,
@@ -98,3 +107,5 @@ export default function Flordle({ solution, skipToNext }) {
     </div>
   )
 }
+
+export default Flordle

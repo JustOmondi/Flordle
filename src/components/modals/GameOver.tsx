@@ -2,7 +2,14 @@ import { Dialog } from '@headlessui/react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
-export default function GameOver({ solutionName, isCorrect, turn, onDialogClosed }) {
+interface Props {
+    onDialogClosed: (reset: boolean) => void,
+    turn: number,
+    isCorrect: boolean,
+    solutionName: string
+}
+   
+const GameOver: React.FC<Props> = ({ solutionName, isCorrect, turn, onDialogClosed }) => {
     return (
         <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
             <div className="absolute right-4 top-4 rounded-full p-1 hover:text-gray-400 focus:outline-none" onClick={() => onDialogClosed(true)}>
@@ -31,3 +38,5 @@ export default function GameOver({ solutionName, isCorrect, turn, onDialogClosed
         </Dialog.Panel>
     )
 }
+
+export default GameOver

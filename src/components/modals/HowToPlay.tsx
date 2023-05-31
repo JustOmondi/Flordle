@@ -2,8 +2,12 @@ import { Dialog } from '@headlessui/react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
-export default function HowToPlayModal({ onDialogClosed }) {
-  const buttonClasses = 'block uppercase text-base lg:text-2xl m-1 w-10 h-8 lg:h-11 leading-relaxed lg:leading-10 font-bold rounded-xl border-b-4 border'
+interface Props {
+  onDialogClosed: (reset: boolean) => void,
+}
+
+const HowToPlayModal: React.FC<Props> = ({ onDialogClosed }) => {
+  const buttonClasses: string = 'block uppercase text-base lg:text-2xl m-1 w-10 h-8 lg:h-11 leading-relaxed lg:leading-10 font-bold rounded-xl border-b-4 border'
 
   return (
     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
@@ -32,3 +36,5 @@ export default function HowToPlayModal({ onDialogClosed }) {
     </Dialog.Panel>
   )
 }
+
+export default HowToPlayModal

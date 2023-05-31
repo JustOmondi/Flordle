@@ -1,7 +1,13 @@
 import { ArrowPathIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
-export default function Nav({ showInfoModal, resetGame, flagCode }) {
+interface Props {
+  showInfoModal: () => void,
+  resetGame: () => void,
+  flagCode: string,
+}
+
+const Nav: React.FC<Props> = ({ showInfoModal, resetGame, flagCode }) => {
   return (
     <header className="bg-white border-b-2 border-grey-300 mb-2">
       <nav className="mx-auto flex w-full md:w-1/2 lg:w-1/4 justify-between p-2 lg:px-4" aria-label="Global">
@@ -23,3 +29,5 @@ export default function Nav({ showInfoModal, resetGame, flagCode }) {
     </header>
   )
 }
+
+export default Nav

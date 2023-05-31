@@ -2,24 +2,28 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { keypadLetters } from '../data/gameData'
 
-export const GREEN = 'green'
-export const YELLOW = 'yellow'
-export const GREY = 'gray'
-export const SELECTED_GREY = 'selected-gray'
-const NUMBER_OF_TURNS = 5
+export const GREEN: string = 'green'
+export const YELLOW: string = 'yellow'
+export const GREY: string = 'gray'
+export const SELECTED_GREY: string = 'selected-gray'
+const NUMBER_OF_TURNS: number = 5
 
-const useFlordle = (solution) => {
+const useFlordle = (solution: {
+    name: string,
+    code: string,
+    code2: string
+  }) => {
 
-    const [turn, setTurn] = useState(0)
-    const [currentGuess, setCurrentGuess] = useState('')
-    const [guesses, setGuesses] = useState([...Array(NUMBER_OF_TURNS)]) // Array of all the guesses made
-    const [history, setHistory] = useState([])
-    const [isCorrect, setIsCorrect] = useState(false)
-    const [usedKeys, setUsedKeys] = useState(keypadLetters)
+    const [turn, setTurn] = useState<number>(0)
+    const [currentGuess, setCurrentGuess] = useState<string>('')
+    const [guesses, setGuesses] = useState<{key: string, colour: string}[][]>([...Array(NUMBER_OF_TURNS)]) // Array of all the guesses made
+    const [history, setHistory] = useState<string[]>([])
+    const [isCorrect, setIsCorrect] = useState<boolean>(false)
+    const [usedKeys, setUsedKeys] = useState<{[letter: string]: {value: string, colour: string}}>(keypadLetters)
 
-    const MAX_LETTERS = solution.name.length
+    const MAX_LETTERS: number = solution.name.length
 
-    const flagURL = `/flags/${solution.code2.toLowerCase()}.svg`;
+    const flagURL: string = `/flags/${solution.code2.toLowerCase()}.svg`;
 
     const resetState = () => {
         setGuesses([...Array(NUMBER_OF_TURNS)])
@@ -31,10 +35,10 @@ const useFlordle = (solution) => {
     }
 
     // Format a guess into array of objects i.e. [key: 'x', colour: 'yellow']
-    const formatGuess = () => {
-        const solutionArray = [...solution.name.toLowerCase().replaceAll(" ", "_")]
+    const formatGuess = (): {key: string, colour: string}[] => {
+        const solutionArray: string[] = [...solution.name.toLowerCase().replaceAll(" ", "_")]
 
-        const formattedGuess = [...currentGuess].map((letter) => {
+        const formattedGuess: {key: string, colour: string}[] = [...currentGuess].map((letter) => {
             return { key: letter, colour: GREY }
         })
 
@@ -42,7 +46,7 @@ const useFlordle = (solution) => {
         formattedGuess.forEach((letter, i) => {
             if (solutionArray[i] === letter.key) {
                 formattedGuess[i].colour = GREEN
-                solutionArray[i] = null
+                solutionArray[i] = ''
             }
         });
 
@@ -50,7 +54,7 @@ const useFlordle = (solution) => {
         formattedGuess.forEach((letter, i) => {
             if (solutionArray.includes(letter.key) && letter.colour !== GREEN) {
                 formattedGuess[i].colour = YELLOW
-                solutionArray[solutionArray.indexOf(letter.key)] = null
+                solutionArray[solutionArray.indexOf(letter.key)] = ''
             }
         })
 
@@ -58,13 +62,13 @@ const useFlordle = (solution) => {
     }
 
     // Add a new guess to the running list of guesses and update the turn
-    const addNewGuess = (formattedGuess) => {
+    const addNewGuess = (formattedGuess: {key: string, colour: string}[]) => {
         if (currentGuess.toLowerCase() === solution.name.toLowerCase()) {
             setIsCorrect(true);
         }
 
         setGuesses((prev) => {
-            const newGuesses = [...prev]
+            const newGuesses: {key: string, colour: string}[][] = [...prev]
             newGuesses[turn] = formattedGuess
             return newGuesses
         })
@@ -78,22 +82,22 @@ const useFlordle = (solution) => {
 
             formattedGuess.forEach((letter, i) => {
 
-                // Only check for color if the key is not a space
+                // Only check for colour if the key is not a space
                 if (letter.key !== ' ') {
-                    const currentColour = newUsedKeys[letter.key].color
+                    const currentColour: string = newUsedKeys[letter.key].colour
 
                     if (letter.colour === GREEN) {
-                        newUsedKeys[letter.key] = { value: letter.key, color: GREEN }
+                        newUsedKeys[letter.key] = { value: letter.key, colour: GREEN }
                         return
                     }
 
                     if (letter.colour === YELLOW && currentColour !== GREEN) {
-                        newUsedKeys[letter.key] = { value: letter.key, color: YELLOW }
+                        newUsedKeys[letter.key] = { value: letter.key, colour: YELLOW }
                         return
                     }
 
                     if (letter.colour === GREY && currentColour !== GREEN && currentColour !== YELLOW) {
-                        newUsedKeys[letter.key] = { value: letter.key, color: SELECTED_GREY }
+                        newUsedKeys[letter.key] = { value: letter.key, colour: SELECTED_GREY }
                         return
                     }
                 }
@@ -106,7 +110,7 @@ const useFlordle = (solution) => {
         setCurrentGuess('')
     }
 
-    const processKeyInput = (key) => {
+    const processKeyInput = (key: string) => {
         if (key === 'Backspace') {
             // Check if last character was space and delete last 2 characters
             if (currentGuess.indexOf(' ') === currentGuess.length - 1) {
@@ -150,13 +154,13 @@ const useFlordle = (solution) => {
                 return;
             }
 
-            const formattedGuess = formatGuess()
+            const formattedGuess: {key: string, colour: string}[] = formatGuess()
 
             addNewGuess(formattedGuess)
         }
     }
 
-    const handleKeyup = ({ key }) => {
+    const handleKeyup = ({ key }: {key: string}) => {
         processKeyInput(key);
     }
 
