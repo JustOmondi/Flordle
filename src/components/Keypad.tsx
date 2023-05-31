@@ -8,7 +8,7 @@ interface Props {
 
 const Keypad: React.FC<Props> = ({ usedKeys, processKeyInput }) => {
 
-  const classes: string = 'select-none pointer-events-auto text-xl uppercase border rounded-xl m-1 px-3 md:px-7 leading-10'
+  const classes: string = 'select-none pointer-events-auto text-xl font-bold uppercase border-t-4 border rounded-xl m-1 px-3 md:px-7 leading-10 shadow-lg'
 
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     let key: string = event.currentTarget.getAttribute('data-key') as string
@@ -23,7 +23,7 @@ const Keypad: React.FC<Props> = ({ usedKeys, processKeyInput }) => {
         const letterValue: string = letter[0]
 
         if ([GREY, YELLOW, GREEN].includes(colour)) {
-          return <div onClick={handleClick} data-key={letterValue} key={i} className={`${colour} ${classes}`}>{letterValue}</div>
+          return <div onClick={handleClick} data-key={letterValue} key={i} className={`${colour} ${classes} clickable`}>{letterValue}</div>
         }
 
         return <div data-key={letterValue} key={i} className={`${colour} ${classes}`}>{letterValue}</div>

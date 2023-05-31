@@ -125,8 +125,12 @@ h1 {
   }
 
   .clickable:active {
-    transform: scale(0.9);
+    transform: scale(1.2);
   }
+}
+
+.flag-image {
+  animation: breathing 7s linear infinite
 }
 
 /* Modal */
@@ -165,12 +169,24 @@ h1 {
   }
 }
 
-@keyframes fadeIn {
+@keyframes breathing {
   0% {
-    opacity: 0;
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(1.1);
   }
 
   100% {
-    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -9,7 +9,7 @@ interface Props {
 
 const Nav: React.FC<Props> = ({ showInfoModal, resetGame, flagCode }) => {
   return (
-    <header className="bg-white border-b-2 border-grey-300 mb-2">
+    <header className="bg-white border-b-2 border-grey-300 mb-2 shadow-md">
       <nav className="mx-auto flex w-full md:w-1/2 lg:w-1/4 justify-between p-2 lg:px-4" aria-label="Global">
         <div className="flex lg:flex-1 z-10">
           <img src="logo.png" alt='logo' className='w-8 h-8 mr-3' />
