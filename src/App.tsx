@@ -33,6 +33,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     setSolution(getRandomCountry());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const skipToNext = () => {
