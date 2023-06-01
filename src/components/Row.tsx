@@ -1,7 +1,14 @@
 import React from 'react'
 
-export default function Row({ guess, currentGuess, maxLetters, solutionName }) {
-    const classes = 'block text-base lg:text-2xl m-1 rounded-xl uppercase font-bold w-10 h-8 lg:h-11 leading-relaxed lg:leading-10'
+interface Props {
+    currentGuess?: string,
+    guess?: {key: string, colour: string}[],
+    maxLetters: number,
+    solutionName: string
+}
+
+const Row: React.FC<Props> = ({ guess, currentGuess, maxLetters, solutionName }) => {
+    const classes: string = 'block text-base lg:text-2xl m-1 rounded-xl uppercase font-bold w-10 h-8 lg:h-11 leading-relaxed lg:leading-10'
 
     if (guess) {
         return (
@@ -47,3 +54,5 @@ export default function Row({ guess, currentGuess, maxLetters, solutionName }) {
         </div>
     )
 }
+
+export default Row

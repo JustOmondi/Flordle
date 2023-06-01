@@ -1,11 +1,19 @@
 import React from 'react'
 import Row from './Row'
 
-export default function Grid({currentGuess, guesses, turn, maxLetters, solutionName}) {
+interface Props {
+  currentGuess: string,
+  guesses: {key: string, colour: string}[][],
+  turn: number,
+  maxLetters: number,
+  solutionName: string
+}
+
+const Grid: React.FC<Props> = ({currentGuess, guesses, turn, maxLetters, solutionName}) => {
 
   return (
     <div>
-        {guesses.map((guess, i) => {
+        {guesses.map((guess: {key: string, colour: string}[], i: number) => {
             if(turn === i) {
                 return <Row solutionName={solutionName} key={i} currentGuess={currentGuess} maxLetters={maxLetters}/>
             }
@@ -14,3 +22,5 @@ export default function Grid({currentGuess, guesses, turn, maxLetters, solutionN
     </div>
   )
 }
+
+export default Grid

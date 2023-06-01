@@ -3,14 +3,23 @@ import ConfettiExplosion from 'react-confetti-explosion'
 import { Toaster } from 'react-hot-toast'
 import useFlordle from '../hooks/useFlordle'
 import { getCookie, setCookie } from '../utils'
-import Grid from './Grid.js'
-import Keypad from './Keypad.js'
+import Grid from './Grid'
+import Keypad from './Keypad'
 import Modal from './Modal'
 import Nav from './Nav'
 
-export default function Flordle({ solution, skipToNext }) {
-  const [mainModalVisible, setMainModalVisible,] = useState(false)
-  const [infoModalVisible, setInfoModalVisible] = useState(false)
+interface Props {
+  solution: {
+    name: string,
+    code: string,
+    code2: string
+  },
+  skipToNext: () => void
+}
+
+ const Flordle: React.FC<Props> = ({ solution, skipToNext }) => {
+  const [mainModalVisible, setMainModalVisible,] = useState<boolean>(false)
+  const [infoModalVisible, setInfoModalVisible] = useState<boolean>(false)
 
   const {
     currentGuess,
@@ -81,7 +90,7 @@ export default function Flordle({ solution, skipToNext }) {
       {isCorrect && <ConfettiExplosion particleCount={200} height={'150vh'} width={3000} duration={3000} />}
       <Nav showInfoModal={showInfoModal} resetGame={resetGame} flagCode={solution.code2} />
       <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
-        <img className="rounded-2xl w-1/3 lg:w-1/12" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag" />
+        <img className="flag-image rounded-2xl w-1/3 lg:w-1/12" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag" />
       </div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name} />
       <Keypad usedKeys={usedKeys} processKeyInput={processKeyInput} />
@@ -98,3 +107,5 @@ export default function Flordle({ solution, skipToNext }) {
     </div>
   )
 }
+
+export default Flordle

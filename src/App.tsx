@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import Flordle from './components/Flordle';
-import { countries } from './data/gameData.js';
+import { countries } from './data/gameData';
 
-function App() {
-  const [solution, setSolution] = useState({ code: "AND", name: "Andorra", code2: "AD" })
-  const [selectedCountries, setSelectedCountries] = useState([])
+const App: React.FC = () => {
+  const [solution, setSolution] = useState<{code: string, name: string, code2: string}>({ code: "AND", name: "Andorra", code2: "AD" })
+  const [selectedCountries, setSelectedCountries] = useState<number[]>([])
 
   const getRandomCountry = () => {
-    let randomNumber = 0
-    let found = false
+    let randomNumber: number = 0
+    let found: boolean = false
 
     while (!found) {
       randomNumber = Math.floor(Math.random() * countries.length)

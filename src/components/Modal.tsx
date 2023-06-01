@@ -5,15 +5,25 @@ import { Dialog, Transition  } from '@headlessui/react'
 import GameOver from './modals/GameOver'
 import HowToPlay from './modals/HowToPlay'
 
-export default function Modal({isCorrect, infoModalVisible, hideInfoModal, hideMainModal, turn, solutionName, resetGame}) {
+interface Props {
+    isCorrect: boolean,
+    infoModalVisible: boolean,
+    hideInfoModal: () => void,
+    hideMainModal: () => void,
+    turn: number,
+    solutionName: string,
+    resetGame: () => void
+}
+
+const Modal: React.FC<Props> = ({isCorrect, infoModalVisible, hideInfoModal, hideMainModal, turn, solutionName, resetGame}) => {
 
     let [isOpen, setIsOpen] = useState(true)
 
-    function delay(ms) {
+    function delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms))
     }
 
-    async function onDialogClosed (reset) {
+    async function onDialogClosed (reset: boolean) {
         setIsOpen(false);       
 
         if (reset) {
@@ -54,3 +64,5 @@ export default function Modal({isCorrect, infoModalVisible, hideInfoModal, hideM
         </Transition>
     )
 }
+
+export default Modal
