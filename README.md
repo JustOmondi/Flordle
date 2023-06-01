@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 Flordle is a flag guessing game inspired by Wordle. In this version, you have to guess the name of the country that the flag shown belongs to. Wordle, but for flags :black_flag: :white_flag:
 
-See [Live Demo]()
+See [Live Demo](https://flordle.cloud12.co.za)
 
 ## How To Play
 
