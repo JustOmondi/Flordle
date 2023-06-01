@@ -11,7 +11,7 @@ const Keypad: React.FC<Props> = ({ usedKeys, processKeyInput }) => {
   const classes: string = 'select-none pointer-events-auto text-xl font-bold uppercase border-t-4 border rounded-xl m-1 px-3 md:px-7 leading-10 shadow-lg'
 
   function handleClick(event: React.MouseEvent<HTMLElement>) {
-    let key: string = event.currentTarget.getAttribute('data-key') as string
+    const key: string = event.currentTarget.getAttribute('data-key') as string
 
     processKeyInput(key);
   }

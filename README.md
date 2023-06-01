@@ -1,10 +1,8 @@
 # Flordle
 <a name="readme-top"></a>
-Flordle is a flag guessing game inspired by Wordle. In this version, you have to guess the name of the country that the flag shown belongs to. Wordle, but for flags :kenya: :south_africa:
+Flordle is a flag guessing game inspired by Wordle. In this version, you have to guess the name of the country that the flag shown belongs to. Wordle, but for flags :black_flag: :white_flag:
 
 See [Live Demo]()
-
-Further work is in progress to implement statistics of gameplay
 
 ## How To Play
 
@@ -25,7 +23,10 @@ Further work is in progress to implement statistics of gameplay
 2. Get all dependencies<br>
 `npm install`
 
-3. Start the React server<br>
+3. Compile CSS<br>
+`npm run buildcss`
+
+4. Start the React server<br>
 `npm start`
 
 # Work in progress
