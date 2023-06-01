@@ -21,7 +21,7 @@ const GameOver: React.FC<Props> = ({ solutionName, isCorrect, turn, onDialogClos
                     <div className="mt-2 text-center">
                         <p>The solution was <span className='text-green-700 font-bold'>{solutionName}</span></p>
                         <p className='text-gray-500 mt-3'>You found the solution in <span className='bold'>{turn}</span>{(turn > 1) ? ' guesses' : ' guess'}</p>
-                        <button onClick={() => onDialogClosed(true)} className='text-center mt-5 bg-gray-300 hover:bg-white p-3 border-2 rounded-lg'>Try another one</button>
+                        <button onClick={() => onDialogClosed(true)} className='text-center mt-5 bg-gray-300 hover:bg-white p-3 border border-gray-500 border-t-4 rounded-lg'>Try another one</button>
                     </div>
 
                 </React.Fragment>

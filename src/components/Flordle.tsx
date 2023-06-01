@@ -90,7 +90,7 @@ interface Props {
       {isCorrect && <ConfettiExplosion particleCount={200} height={'150vh'} width={3000} duration={3000} />}
       <Nav showInfoModal={showInfoModal} resetGame={resetGame} flagCode={solution.code2} />
       <div className='flex p-6 content-center justify-center items-center drop-shadow-lg rounded-xl overflow-hidden'>
-        <img className="flag-image rounded-2xl w-1/3 lg:w-1/12" src={`${process.env.PUBLIC_URL}${flagURL}`} alt="flag" />
+        <img className="flag-image rounded-2xl w-1/3 lg:w-1/12" src={`${process.env.PUBLIC_URL}${flagURL}`} alt={`${solution.code} flag`} />
       </div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} maxLetters={MAX_LETTERS} solutionName={solution.name} />
       <Keypad usedKeys={usedKeys} processKeyInput={processKeyInput} />

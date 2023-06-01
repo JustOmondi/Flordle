@@ -15,9 +15,9 @@ const App: React.FC = () => {
 
       if (!selectedCountries.includes(randomNumber)) {
 
-        // Restrict solutions to names with a maximum of 7 letters on mobile
+        // Restrict solutions to names with a maximum of 6 letters on mobile
         if (window.innerWidth <= 600) {
-          if (countries[randomNumber].name.length <= 7) {
+          if (countries[randomNumber].name.length <= 6) {
             found = true
           }
         } else {
